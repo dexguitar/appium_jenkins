@@ -7,7 +7,12 @@
         <parameter name="url" value="http://0.0.0.0:4723/wd/hub"/>
 
         <classes>
-            <class name="testScripts.TestScript1"/>
+            <class name="testScripts.TestScript1">
+                <methods>
+                    <include name="simpleLoginTest" />
+                    <include name="buttonPressTest" />
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

@@ -9,7 +9,7 @@ import static org.testng.Assert.assertEquals;
 
 public class TestScript1 extends BaseClass {
 
-    @Test(priority = 0)
+    @Test
     public void simpleLoginTest() {
         driver.get("https://jdi-testing.github.io/jdi-mobile-web/index.html");
         driver.findElement(By.id("user-icon")).click();
