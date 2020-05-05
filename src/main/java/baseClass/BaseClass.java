@@ -7,6 +7,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +30,22 @@ public class BaseClass {
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         Thread.sleep(5000);
 
+        // Calling Appium
+        try {
+            Process p = Runtime.getRuntime().exec(
+                    "appium --chromedriver-executable /Users/doglabel/" +
+                            "Downloads/chromedriver"
+            );
+            InputStream is = p.getInputStream();
+            int i = 0;
+            StringBuffer sb = new StringBuffer();
+            while ((i = is.read()) != -1) {
+                sb.append((char) i);
+                System.out.println(sb.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @AfterTest
