@@ -1,13 +1,36 @@
 package testScripts;
 
+import baseClass.BaseClass;
 import org.openqa.selenium.By;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import baseClass.BaseClass;
+import java.io.IOException;
+import java.io.InputStream;
 
 import static org.testng.Assert.assertEquals;
 
 public class TestScript1 extends BaseClass {
+
+    @BeforeTest
+    public void setUp() {
+        try {
+            Process p = Runtime.getRuntime().exec(
+                    "appium --chromedriver-executable /Users/doglabel/" +
+                            "Downloads/chromedriver"
+            );
+            InputStream is = p.getInputStream();
+            int i = 0;
+            StringBuffer sb = new StringBuffer();
+            while ((i = is.read()) != -1) {
+                sb.append((char) i);
+                System.out.println(sb.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Test
     public void simpleLoginTest() {
@@ -29,5 +52,10 @@ public class TestScript1 extends BaseClass {
         driver.findElement(By.xpath("//input[@type='button']")).click();
 
         assertEquals(driver.switchTo().alert().getText(), "Red button");
+    }
+
+    @AfterTest
+    public void tearDown() {
+        driver.quit();
     }
 }
