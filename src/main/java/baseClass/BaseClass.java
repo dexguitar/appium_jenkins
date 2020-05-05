@@ -38,7 +38,7 @@ public class BaseClass {
         service.start();
 
         driver = new AppiumDriver<MobileElement>(
-                new URL("http://0.0.0.0:4723/wd/hub"), cap
+                new URL("http://192.168.0.101:4723/wd/hub"), cap
         );
     }
 
