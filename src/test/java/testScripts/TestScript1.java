@@ -1,13 +1,25 @@
 package testScripts;
 
 import org.openqa.selenium.By;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import baseClass.BaseClass;
 
+import java.io.IOException;
+
 import static org.testng.Assert.assertEquals;
 
 public class TestScript1 extends BaseClass {
+
+    @BeforeTest
+    public void setUp() throws IOException {
+        Process p = new ProcessBuilder(
+                "appium", "--chromedriver-executable " +
+                "/Users/doglabel/Downloads/chromedriver")
+                .start();
+    }
 
     @Test
     public void simpleLoginTest() {
@@ -29,5 +41,10 @@ public class TestScript1 extends BaseClass {
         driver.findElement(By.xpath("//input[@type='button']")).click();
 
         assertEquals(driver.switchTo().alert().getText(), "Red button");
+    }
+
+    @AfterTest
+    public void tearDown() {
+        driver.quit();
     }
 }
