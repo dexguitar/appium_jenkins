@@ -19,7 +19,7 @@ public class BaseClass {
 
     @BeforeTest
     @Parameters({"deviceName", "udid", "platformVersion", "url"})
-    public void setup(String deviceName, String udid, String platformVersion, String url) throws InterruptedException, MalformedURLException {
+    public void setUp(String deviceName, String udid, String platformVersion, String url) throws InterruptedException, MalformedURLException {
         DesiredCapabilities cap = new DesiredCapabilities();
         cap.setCapability("deviceName", deviceName);
         cap.setCapability("udid", udid);
